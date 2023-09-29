@@ -14,6 +14,7 @@ const btn = document.querySelector("button");
 btn.addEventListener("click",()=>{
     document.querySelectorAll(".flip-inner").forEach(card=>{
         card.classList.remove("flip");
+        card.classList.remove("animate");
     })
     history.length=0;
     cards.length = 0;
@@ -24,10 +25,8 @@ btn.addEventListener("click",()=>{
 const clickArea = document.querySelector(".container");
 let N=0;
 clickArea.addEventListener("click", (e)=>{
-    // console.log(e.target.parentNode.classList);
-    // console.log(document.querySelector(`${e.target.parentNode}`));
-    // console.log(document.querySelector(`#${e.target.dataset.link}`) );
-    // console.log(document.querySelector(`#${e.target.dataset.link}`).src );
+    // console.log(cards);
+   
 
 //histry of click images src
     history.push(document.querySelector(`#${e.target.dataset.link}`).src);
@@ -44,8 +43,9 @@ clickArea.addEventListener("click", (e)=>{
     //wait 1 sec and then flip 2 last cards     
             setTimeout(()=>{
                 cards.at(-1).classList.remove("flip");
-            cards.at(-2).classList.remove("flip");
-            },1000);
+                cards.at(-2).classList.remove("flip");
+                cards.length=0;
+            },500);
             
 
         }
@@ -54,6 +54,12 @@ clickArea.addEventListener("click", (e)=>{
                 alert("finished the game congrats");
                
             },1000);
+        }
+        else{
+            setTimeout(()=>{
+                cards.at(-1).classList.add("animate");
+                cards.at(-2).classList.add("animate");
+            },100)
         }
         N=0;
     }
